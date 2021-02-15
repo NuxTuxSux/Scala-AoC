@@ -4,10 +4,10 @@ case object S extends Direction { lazy val unary_- = N }
 case object W extends Direction { lazy val unary_- = E }
 case object E extends Direction { lazy val unary_- = W }
 
-trait Piece { val isTerminal: Boolean }                    // mi serve il trait Piece?
-case object End extends Piece { val isTerminal = true }
-case class Tile(var tile: Vector[Vector[Char]]) extends Piece {
-    val isTerminal = false
+// trait Piece { val isTerminal: Boolean }                    // mi serve il trait Piece?
+// case object End extends Piece { val isTerminal = true }
+case class Tile(var tile: Vector[Vector[Char]])/* extends Piece*/ {
+    // val isTerminal = false
     override def toString = tile map (_.mkString) mkString "\n"
     def flip = Tile(tile.reverse)                          // Queste due generano D_8
     def swap = Tile(tile.transpose)
@@ -70,7 +70,13 @@ case class Puzzle(val tiles: Map[Position, Tile] = Map(), val border: Set[Positi
             case (Some(next), otherTiles) => next solve otherTiles
         }
     }
+    def goRightFrom(p: Position) = new Iterable {
+        
+    }
+    lazy val glued = {
+        val firstPos = tiles.keys reduce ((p, q) => Position(p.row min q.row, p.col min q.col))
 
+    }
 }
 
 object Tiles {
