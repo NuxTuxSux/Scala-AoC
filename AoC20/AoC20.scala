@@ -6,7 +6,7 @@ case object S extends Direction { lazy val unary_- = N }
 case object W extends Direction { lazy val unary_- = E }
 case object E extends Direction { lazy val unary_- = W }
 
-case class Tile(val tile: Vector[Vector[Char]]) {                                           // è un val!
+case class Tile(val tile: Vector[Vector[Char]]) {
     override def toString = tile map (_.mkString) mkString "\n"
     def flip = Tile(tile.reverse)                                                           // Queste due generano D_8
     def swap = Tile(tile.transpose)
@@ -30,7 +30,7 @@ case class Tile(val tile: Vector[Vector[Char]]) {                               
 
     def count(c: Char) = (tile map (x => x count (_ == c))).sum
 
-    def searchAndReplace(pattern: Tile) = {
+    def searchAndReplace(pattern: Tile) = {                                                 // imperativo
         var tileCopy = (tile map (_.toArray)).toArray
         val ph = pattern.tile.length
         val pw = pattern.tile.head.length                                                   // unsafe, pattern deve avere un elemento
